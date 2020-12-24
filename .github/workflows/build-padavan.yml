@@ -9,10 +9,14 @@ on:
     - 'v*'
   #  branches: 
   #    - master
-#  schedule:
-#    - cron: 0 8 * * 5
+  schedule:
+    - cron: 0 16 * * 5
   watch:
     types: [started]
+
+env:
+  TZ: Asia/Shanghai
+  FILE_NAME: Padavan-RM2100
 
 jobs:
   build:
@@ -29,7 +33,10 @@ jobs:
         sudo apt-get update
         sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
         cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
-        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
+        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget time
+        sudo timedatectl set-timezone "$TZ"
+        echo "DATE=$(date "+%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
+
     - name: Clone source code
       run: |
         git clone --depth=1 https://github.com/chongshengB/rt-n56u.git /opt/rt-n56u
@@ -98,6 +105,20 @@ jobs:
         sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
+
+    - name: Create release
+      id: release
+      uses: ncipollo/release-action@v1
+      with:
+        name: ${{ env.DATE }} Padavan for RM2100
+        allowUpdates: true
+        tag: ${{ env.FILE_NAME }}
+        commit: main
+        token: ${{ secrets.RELEASES_TOKEN }}
+        body: |
+          红米ac2100老毛子固件
+        artifacts: /opt/images
+
     - name : Upload packages
       uses: actions/upload-artifact@master
       if: always()
