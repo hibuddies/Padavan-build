@@ -106,7 +106,7 @@ jobs:
         sudo ./build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
 
-    - name: Check Files1
+    - name: Check Files
       run: |
         cd /opt/images
         ls
