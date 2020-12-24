@@ -111,11 +111,11 @@ jobs:
         cd /opt/images
         ls
 
-    - name: Organize files
-      run: |
-        cd /opt/images
-        sudo zip ./RM2100.zip ./*.trx
-        sudo rm -rf *.trx
+#    - name: Organize files
+#      run: |
+#        cd /opt/images
+#        sudo zip ./RM2100.zip ./*.trx
+#        sudo rm -rf *.trx
 
     - name: Check Files2
       run: |
@@ -133,7 +133,7 @@ jobs:
         token: ${{ secrets.RELEASES_TOKEN }}
         body: |
           红米ac2100老毛子固件
-        artifacts: /opt/images
+        artifacts: /opt/images/*
 
     - name : Upload packages
       uses: actions/upload-artifact@master
