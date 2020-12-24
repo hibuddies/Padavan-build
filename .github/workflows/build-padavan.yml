@@ -113,7 +113,7 @@ jobs:
         name: ${{ env.DATE }} Padavan for RM2100
         allowUpdates: true
         tag: ${{ env.FILE_NAME }}
-        commit: main
+        commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
         body: |
           红米ac2100老毛子固件
