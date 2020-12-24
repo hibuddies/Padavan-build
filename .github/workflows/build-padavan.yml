@@ -111,17 +111,6 @@ jobs:
         cd /opt/images
         ls
 
-#    - name: Organize files
-#      run: |
-#        cd /opt/images
-#        sudo zip ./RM2100.zip ./*.trx
-#        sudo rm -rf *.trx
-
-    - name: Check Files2
-      run: |
-        cd /opt/images
-        ls
-
     - name: Create release
       id: release
       uses: ncipollo/release-action@v1
@@ -132,12 +121,12 @@ jobs:
         commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
         body: |
-          红米ac2100老毛子固件
+          红米ac2100老毛子固件，每周五更新，感谢c大！
         artifacts: /opt/images/*
 
-    - name : Upload packages
-      uses: actions/upload-artifact@master
-      if: always()
-      with:
-        name: Padavan-packages
-        path: /opt/images
+#    - name : Upload packages
+#      uses: actions/upload-artifact@master
+#      if: always()
+#      with:
+#        name: Padavan-packages
+#        path: /opt/images
