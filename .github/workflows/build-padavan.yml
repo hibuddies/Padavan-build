@@ -31,7 +31,7 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
       run: |
         sudo apt-get update
-        sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
+        sudo apt-get -y install zip unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
         cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget time
         sudo timedatectl set-timezone "$TZ"
@@ -106,7 +106,18 @@ jobs:
         sudo ./build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
 
-    - name: Check Files
+    - name: Check Files1
+      run: |
+        cd /opt/images
+        ls
+
+    - name: Organize files
+      run: |
+        cd /opt/images
+        sudo zip ./RM2100.zip ./*.trx
+        sudo rm -rf *.trx
+
+    - name: Check Files2
       run: |
         cd /opt/images
         ls
