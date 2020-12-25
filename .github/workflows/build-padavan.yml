@@ -107,9 +107,11 @@ jobs:
         sudo mv -f images/*.trx /opt/images/
 
     - name: Check Files
+      id: ls
       run: |
         cd /opt/images
         ls
+        echo "::set-output name=status::success"
 
     - name: Create release
       id: release
@@ -123,6 +125,10 @@ jobs:
         body: |
           红米ac2100老毛子固件，每周五更新，感谢c大！
         artifacts: /opt/images/*
+
+    - name: WeChat notification
+      if: steps.ls.outputs.status == 'success' && !cancelled()
+      run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}打包完成
 
 #    - name : Upload packages
 #      uses: actions/upload-artifact@master
