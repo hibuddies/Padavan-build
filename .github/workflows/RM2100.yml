@@ -123,7 +123,7 @@ jobs:
         commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
         body: |
-          红米ac2100老毛子固件，每周五更新，感谢c大！
+          红米ac2100，极路由2老毛子固件，每周五更新，感谢c大！
         artifacts: /opt/images/*
 
     - name: Telegram notification
