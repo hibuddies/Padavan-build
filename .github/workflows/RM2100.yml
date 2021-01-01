@@ -17,7 +17,7 @@ on:
 env:
   TZ: Asia/Shanghai
   FILE_NAME: Padavan
-  FILE_NAME1: RM2100
+  FILE_NAME1: Padavan-RM2100
 
 jobs:
   build:
