@@ -117,7 +117,7 @@ jobs:
       id: release
       uses: ncipollo/release-action@v1
       with:
-        name: ${{ env.DATE }} Padavan for RM2100
+        name: ${{ env.DATE }} Padavan for RM2100 HC5761A
         allowUpdates: true
         tag: ${{ env.FILE_NAME }}
         commit: master
