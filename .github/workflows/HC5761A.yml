@@ -17,7 +17,7 @@ on:
 env:
   TZ: Asia/Shanghai
   FILE_NAME: Padavan
-  FILE_NAME1: HC5761A
+  FILE_NAME1: Padavan-HC5761A
 
 jobs:
   build:
